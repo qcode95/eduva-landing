@@ -1,0 +1,111 @@
+@import '@angular/cdk/overlay-prebuilt.css';
+@import 'primeicons/primeicons.css';
+
+@import './assets/css/grid.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  :root {
+    --color-black: #3a4252;
+    --color-white: #ffffff;
+
+    --color-dark: #000000;
+
+    --color-gray-50: #f6f7f9;
+    --color-gray-100: #eceef2;
+    --color-gray-200: #d5d9e2;
+    --color-gray-300: #b1bbc8;
+    --color-gray-400: #8695aa;
+    --color-gray-500: #64748b;
+    --color-gray-600: #526077;
+    --color-gray-700: #434e61;
+    --color-gray-800: #3a4252;
+    --color-gray-900: #23272e;
+    --color-gray: var(--color-gray-500);
+
+    --color-primary-50: #f0f9ff;
+    --color-primary-100: #d9f0fb;
+    --color-primary-200: #b6e4f7;
+    --color-primary-300: #81d2f1;
+    --color-primary-400: #4dbfe9;
+    --color-primary-500: #2093e7;
+    --color-primary-600: #157cd9;
+    --color-primary-700: #115fb8;
+    --color-primary-800: #0e4b92;
+    --color-primary: var(--color-primary-500);
+
+    --color-secondary-50: #f3f7ff;
+    --color-secondary-100: #e2ebfd;
+    --color-secondary-200: #cddcfb;
+    --color-secondary-300: #aed9f9;
+    --color-secondary-400: #7dc1f6;
+    --color-secondary-500: #3371ed;
+    --color-secondary-600: #265cd6;
+    --color-secondary-700: #1d48b3;
+    --color-secondary-800: #163990;
+  }
+
+  html {
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      'Open Sans',
+      'Helvetica Neue',
+      sans-serif;
+  }
+
+  html.dark {
+  }
+
+  html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 4px;
+    height: 4px;
+  }
+
+  html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  body {
+    font-size: 14px;
+    line-height: 1.6;
+    text-rendering: optimizeSpeed;
+    overscroll-behavior: contain;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .dark body {
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font-family: inherit;
+    font-size: inherit;
+  }
+}
