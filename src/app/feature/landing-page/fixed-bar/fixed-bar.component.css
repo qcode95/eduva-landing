@@ -1,0 +1,10 @@
+.fixed-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(180deg, #fff3, #dddcfc33 40.63%, #8f85ff33);
+  opacity: 0.2;
+}

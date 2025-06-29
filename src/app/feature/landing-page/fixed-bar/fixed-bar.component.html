@@ -1,0 +1,23 @@
+<aside
+  class="fixed-bar fixed bottom-0 left-0 right-0 z-20 w-full bg-[#191d1e] py-2 text-white transition-all"
+  [ngClass]="{
+    'invisible translate-y-0 transform opacity-0': !showBar(),
+    'visible translate-y-0 transform opacity-100': showBar(),
+  }">
+  <div class="e-container">
+    <div
+      class="relative z-10 mx-auto flex items-center justify-between sm:justify-center">
+      <app-logo class="sm:hidden" />
+      <div class="flex justify-center gap-4">
+        <button class="button button-primary">Học thử miễn phí</button>
+        <button class="button button-secondary">
+          <div
+            class="text-gradient block leading-[150%]"
+            (click)="openSignUpModal()">
+            Đăng Ký Ngay
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</aside>

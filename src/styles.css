@@ -2,6 +2,8 @@
 @import 'primeicons/primeicons.css';
 
 @import './assets/css/grid.css';
+@import './assets/fonts/LexendTera/stylesheet.css';
+@import './assets/fonts/Lato/stylesheet.css';
 
 @tailwind base;
 @tailwind components;
@@ -107,5 +109,39 @@
   button {
     font-family: inherit;
     font-size: inherit;
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, #2093e7, #a174ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .button {
+    display: inline-block;
+    padding: 10px 24px 8px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    transition: color linear 0.2s;
+  }
+
+  .button:hover {
+    opacity: 0.9;
+  }
+
+  .button-primary {
+    color: #fff;
+    background: linear-gradient(141deg, #21a2ff, #8951ff 73.36%);
+  }
+
+  .button-secondary {
+    background: #232e49;
   }
 }
