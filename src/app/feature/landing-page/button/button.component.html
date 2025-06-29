@@ -5,6 +5,11 @@
     'btn--rounded': typeList.includes('rounded'),
     'btn--text': typeList.includes('text'),
     'btn--outline': typeList.includes('outline'),
-  }">
+  }"
+  (click)="onClick($event)"
+  (keydown.enter)="onClick($event)">
+  <ng-container *ngIf="loading()">
+    <span class="spinner spinner-light spinner-lg mr-[6px]"></span>
+  </ng-container>
   {{ text() }}
 </button>

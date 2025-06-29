@@ -92,7 +92,7 @@
         type() === 'password' && (!options() || options().length === 0)
       ) {
         @if (isShowPassword()) {
-          <div
+          <span
             class="material-symbols-outlined absolute right-[14px] top-[17%] block cursor-pointer text-lg text-[#64748b]"
             (mousedown)="$event.preventDefault()"
             (click)="
@@ -101,9 +101,9 @@
               $event.preventDefault()
             ">
             visibility
-          </div>
+          </span>
         } @else {
-          <div
+          <span
             class="material-symbols-outlined absolute right-[14px] top-[17%] block cursor-pointer text-lg text-[#64748b]"
             (mousedown)="$event.preventDefault()"
             (click)="
@@ -112,7 +112,7 @@
               $event.preventDefault()
             ">
             visibility_off
-          </div>
+          </span>
         }
       }
     </div>
