@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 type ButtonType = 'primary' | 'rounded' | 'text' | 'outline';
@@ -14,9 +20,16 @@ type ButtonType = 'primary' | 'rounded' | 'text' | 'outline';
 export class ButtonComponent {
   text = input.required<string>();
   type = input.required<ButtonType | ButtonType[]>();
+  loading = input<boolean>(false);
+
+  @Output() clickEvent = new EventEmitter<Event>();
 
   get typeList(): ButtonType[] {
     const value = this.type();
     return Array.isArray(value) ? value : [value];
+  }
+
+  onClick(event: Event) {
+    this.clickEvent.emit(event);
   }
 }

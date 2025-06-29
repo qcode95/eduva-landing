@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
+import { ToastModule } from 'primeng/toast';
+
 import { LogoComponent } from './logo/logo.component';
 import { HeroComponent } from './hero/hero.component';
 import { FeatureComponent } from './feature/feature.component';
@@ -27,6 +29,7 @@ import { GlobalModalHostComponent } from '../../shared/components/global-modal-h
     ContactComponent,
     FixedBarComponent,
     GlobalModalHostComponent,
+    ToastModule,
   ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.css',
