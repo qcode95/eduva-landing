@@ -32,5 +32,8 @@ jobs:
           echo "BASE_API_URL=${{ secrets.BASE_API_URL }}" >> .env
           echo "CLIENT_URL=${{ secrets.CLIENT_URL }}" >> .env
 
-      - name: ✅ Run unit tests
+      - name: Set CHROME_BIN for Puppeteer
+        run: echo "CHROME_BIN=$(node node_modules/puppeteer/bin/puppeteer.js)" >> $GITHUB_ENV
+
+      - name: Run unit tests
         run: npm run test
