@@ -12,11 +12,13 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { FormControlComponent } from '../../../shared/components/form-control/form-control.component';
-import { GlobalModalService } from '../../../shared/layout/global-modal/global-modal.service';
-import { ButtonComponent } from '../button/button.component';
 import { AuthService } from '../../../core/auth/services/auth.service';
-import { RegisterRequest } from '../../../shared/models/api/request/command/register-request.model';
+import { GlobalModalService } from '../../../shared/layout/global-modal/global-modal.service';
+
+import { FormControlComponent } from '../../../shared/components/form-control/form-control.component';
+import { ButtonComponent } from '../button/button.component';
+
+import { type RegisterRequest } from '../../../shared/models/api/request/command/register-request.model';
 
 @Component({
   selector: 'app-sign-up-modal',
