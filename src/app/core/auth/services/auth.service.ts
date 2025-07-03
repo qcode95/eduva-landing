@@ -1,11 +1,16 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { RequestService } from '../request/request.service';
-import { ToastHandlingService } from '../toast/toast-handling.service';
-import { environment } from '../../../../../environments/environment';
-import { RegisterRequest } from '../../../models/api/request/command/register-request.model';
-import { catchError, map, Observable, of, tap } from 'rxjs';
-import { StatusCode } from '../../../constants/status-code.constant';
 import { HttpErrorResponse } from '@angular/common/http';
+
+import { catchError, map, Observable, of, tap } from 'rxjs';
+
+import { environment } from '../../../../environments/environment';
+
+import { RequestService } from '../../../shared/services/core/request/request.service';
+import { ToastHandlingService } from '../../../shared/services/core/toast/toast-handling.service';
+
+import { StatusCode } from '../../../shared/constants/status-code.constant';
+
+import { type RegisterRequest } from '../../../shared/models/api/request/command/register-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,14 +20,21 @@ export class AuthService {
   private readonly toastService = inject(ToastHandlingService);
 
   // API URLs
-  private readonly REGISTER_URL = `${environment.baseApiUrl}/auth/register`;
+  private readonly BASE_API_URL = environment.baseApiUrl;
+  private readonly REGISTER_URL = `${this.BASE_API_URL}/auth/register`;
+  private readonly CLIENT_URL = environment.clientUrl;
 
   private readonly isLoadingSignal = signal<boolean>(false);
   readonly isLoading = this.isLoadingSignal.asReadonly();
 
   register(request: RegisterRequest): Observable<void> {
     this.isLoadingSignal.set(true);
-    return this.requestService.post<void>(this.REGISTER_URL, request).pipe(
+
+    const payload: RegisterRequest = {
+      ...request,
+      clientUrl: this.CLIENT_URL,
+    };
+    return this.requestService.post<void>(this.REGISTER_URL, payload).pipe(
       tap(res => {
         if (res.statusCode === StatusCode.SUCCESS) {
           this.toastService.success(

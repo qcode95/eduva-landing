@@ -15,9 +15,8 @@ import { CommonModule } from '@angular/common';
 import { FormControlComponent } from '../../../shared/components/form-control/form-control.component';
 import { GlobalModalService } from '../../../shared/layout/global-modal/global-modal.service';
 import { ButtonComponent } from '../button/button.component';
-import { AuthService } from '../../../shared/services/core/auth/auth.service';
+import { AuthService } from '../../../core/auth/services/auth.service';
 import { RegisterRequest } from '../../../shared/models/api/request/command/register-request.model';
-import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-sign-up-modal',
@@ -35,8 +34,8 @@ import { environment } from '../../../../environments/environment';
 })
 export class SignUpModalComponent {
   private readonly fb = inject(FormBuilder);
-  private readonly globalModalService = inject(GlobalModalService);
   private readonly authService = inject(AuthService);
+  private readonly globalModalService = inject(GlobalModalService);
 
   readonly isLoading = this.authService.isLoading;
 
@@ -88,13 +87,8 @@ export class SignUpModalComponent {
       password: this.form.value.password,
       phoneNumber: this.form.value.phoneNumber,
       confirmPassword: this.form.value.confirmPassword,
-      clientUrl: environment.clientUrl + 'auth/login',
     };
 
-    this.authService.register(req).subscribe({
-      next: () => {
-        this.closeModal();
-      },
-    });
+    this.authService.register(req).subscribe(() => this.closeModal());
   }
 }
