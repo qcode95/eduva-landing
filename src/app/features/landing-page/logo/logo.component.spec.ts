@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+
+import { of } from 'rxjs';
 
 import { LogoComponent } from './logo.component';
 
@@ -8,9 +11,18 @@ describe('LogoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LogoComponent]
-    })
-    .compileComponents();
+      imports: [LogoComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({}),
+            queryParams: of({}),
+            snapshot: {},
+          },
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LogoComponent);
     component = fixture.componentInstance;

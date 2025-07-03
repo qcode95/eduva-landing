@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+
+import { of } from 'rxjs';
 
 import { FixedBarComponent } from './fixed-bar.component';
 
@@ -8,9 +11,18 @@ describe('FixedBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FixedBarComponent]
-    })
-    .compileComponents();
+      imports: [FixedBarComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({}),
+            queryParams: of({}),
+            snapshot: {},
+          },
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FixedBarComponent);
     component = fixture.componentInstance;

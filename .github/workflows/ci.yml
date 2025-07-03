@@ -10,18 +10,27 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      BASE_API_URL: ${{ secrets.BASE_API_URL }}
+      CLIENT_URL: ${{ secrets.CLIENT_URL }}
+
     steps:
-      - name: ⬇️ Checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: 🟢 Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
-      - name: 📦 Install dependencies
+      - name: Install dependencies
         run: npm ci
 
-      - name: ✅ Run unit tests
+      - name: Create .env file from secrets
+        run: |
+          echo "BASE_API_URL=${{ secrets.BASE_API_URL }}" >> .env
+          echo "CLIENT_URL=${{ secrets.CLIENT_URL }}" >> .env
+
+      - name: Run unit tests
         run: npm run test
