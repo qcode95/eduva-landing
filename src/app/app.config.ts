@@ -14,6 +14,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import localeVi from '@angular/common/locales/vi';
 
 import { providePrimeNG } from 'primeng/config';
+import { MessageService, ConfirmationService } from 'primeng/api';
 
 import { routes } from './app.routes';
 
@@ -21,8 +22,11 @@ import { MyPreset } from './my-preset';
 
 registerLocaleData(localeVi);
 
+const AppProviders = [MessageService, ConfirmationService];
+
 export const appConfig: ApplicationConfig = {
   providers: [
+    ...AppProviders,
     provideExperimentalZonelessChangeDetection(),
     provideHttpClient(withInterceptors([])),
     provideRouter(
@@ -30,7 +34,7 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withRouterConfig({
         paramsInheritanceStrategy: 'always',
-      }),
+      })
     ),
     provideAnimationsAsync(),
     providePrimeNG({

@@ -1,0 +1,122 @@
+<div
+  (click)="$event.stopPropagation()"
+  class="pointer-events-auto relative z-[1] w-[500px] overflow-hidden rounded-[16px] bg-white px-[30px] pb-[30px] pt-[10px] font-lato sm:w-[420px]">
+  <div class="background"></div>
+  <div class="mx-[-18px] flex items-center">
+    <button
+      class="ml-auto size-10 cursor-pointer rounded-full text-xl opacity-70 transition-colors duration-200 hover:bg-[#0000001a]"
+      (click)="closeModal()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <header class="mt-[10px]">
+    <h2 class="text-2xl font-semibold">Đăng Ký Tài Khoản</h2>
+    <p class="mt-2 text-[15px] opacity-90">
+      Đăng ký tài khoản để trở thành 1 school admin
+    </p>
+  </header>
+  <form
+    [formGroup]="form"
+    class="mt-4 flex max-h-[50vh] flex-col gap-4 overflow-y-auto">
+    <app-form-control
+      label="Tên của bạn?"
+      type="text"
+      placeholder="Họ và tên của bạn"
+      formControlName="fullName"
+      [name]="'fullName'"
+      [submitted]="submitted()"
+      [required]="true" />
+
+    <app-form-control
+      label="Email của bạn"
+      type="email"
+      placeholder="Địa chỉ email"
+      formControlName="email"
+      [name]="'email'"
+      [submitted]="submitted()"
+      [required]="true"
+      [email]="true" />
+
+    <app-form-control
+      label="Số điện thoại"
+      type="tel"
+      placeholder="Nhập số điện thoại"
+      formControlName="phoneNumber"
+      [name]="'phoneNumber'"
+      [submitted]="submitted()"
+      [required]="true"
+      [phone]="true" />
+
+    <app-form-control
+      type="password"
+      label="Mật khẩu"
+      placeholder="Mật khẩu"
+      formControlName="password"
+      [name]="'password'"
+      [submitted]="submitted()"
+      [required]="true" />
+    <div class="mx-1 my-[10px]">
+      <div class="flex gap-1">
+        <div
+          class="h-[5px] flex-1 rounded-[4px]"
+          [ngClass]="{
+            'bg-[#e1e4eb]': !passwordLevel(),
+            'bg-[#d43031]': passwordLevel()! < 4,
+            'bg-[#faa61b]': passwordLevel() === 4,
+            'bg-[#02875a]': passwordLevel() === 5,
+          }"></div>
+        <div
+          class="h-[5px] flex-1 rounded-[4px]"
+          [ngClass]="{
+            'bg-[#e1e4eb]': !passwordLevel() || passwordLevel()! < 3,
+            'bg-[#d43031]': passwordLevel() === 3,
+            'bg-[#faa61b]': passwordLevel() === 4,
+            'bg-[#02875a]': passwordLevel() === 5,
+          }"></div>
+        <div
+          class="h-[5px] flex-1 rounded-[4px]"
+          [ngClass]="{
+            'bg-[#e1e4eb]': !passwordLevel() || passwordLevel()! < 4,
+            'bg-[#faa61b]': passwordLevel() === 4,
+            'bg-[#02875a]': passwordLevel() === 5,
+          }"></div>
+        <div
+          class="h-[5px] flex-1 rounded-[4px]"
+          [ngClass]="{
+            'bg-[#e1e4eb]': passwordLevel() !== 5,
+            'bg-[#02875a]': passwordLevel() === 5,
+          }"></div>
+      </div>
+      <div class="py-2 text-right text-xs font-medium text-[#666]">
+        {{
+          passwordLevel() &&
+            (passwordLevel() === 5
+              ? 'Mật khẩu mạnh'
+              : passwordLevel() === 4
+                ? 'Mật khẩu trung bình'
+                : 'Mật khẩu yếu')
+        }}
+      </div>
+    </div>
+
+    <app-form-control
+      type="password"
+      label="Xác nhận mật khẩu"
+      placeholder="Mật khẩu"
+      formControlName="confirmPassword"
+      [name]="'confirmPassword'"
+      [confirmPassword]="form.value.password"
+      class="-mt-4"
+      [submitted]="submitted()"
+      [required]="true" />
+  </form>
+  <!-- ? Submit Button -->
+  <div class="mt-5">
+    <app-button
+      [text]="'Đăng ký'"
+      cli
+      [type]="'rounded'"
+      (clickEvent)="onSubmit()"
+      [loading]="isLoading()" />
+  </div>
+</div>

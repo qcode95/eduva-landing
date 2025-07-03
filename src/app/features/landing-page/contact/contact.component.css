@@ -1,0 +1,12 @@
+.section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  left: 0;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #fff3, #dddcfc33 40.63%, #8f85ff33);
+  opacity: 0.2;
+}
