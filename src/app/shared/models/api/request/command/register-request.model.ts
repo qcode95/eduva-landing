@@ -4,5 +4,5 @@ export interface RegisterRequest {
   phoneNumber: string;
   password: string;
   confirmPassword: string;
-  clientUrl: string;
+  clientUrl?: string;
 }
