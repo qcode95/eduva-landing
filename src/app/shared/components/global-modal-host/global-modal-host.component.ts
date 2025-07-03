@@ -13,7 +13,9 @@ import { GlobalModalService } from '../../layout/global-modal/global-modal.servi
   standalone: true,
   imports: [CommonModule, NgComponentOutlet],
   templateUrl: './global-modal-host.component.html',
+  template: '',
   styleUrl: './global-modal-host.component.css',
+  styles: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GlobalModalHostComponent {

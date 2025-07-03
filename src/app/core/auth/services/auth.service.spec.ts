@@ -1,12 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+
+import { MessageService } from 'primeng/api';
 
 describe('AuthService', () => {
   let service: AuthService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [MessageService, HttpClient, provideHttpClient()],
+    });
     service = TestBed.inject(AuthService);
   });
 

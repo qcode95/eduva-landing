@@ -1,4 +1,18 @@
-import matchers from '@testing-library/jest-dom/matchers';
-import { expect } from 'vitest';
+// src/test-setup.ts
+import '@analogjs/vite-plugin-angular/setup-vitest';
+import 'reflect-metadata';
 
-expect.extend(matchers);
+import { TestBed } from '@angular/core/testing';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting,
+} from '@angular/platform-browser-dynamic/testing';
+
+TestBed.initTestEnvironment(
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting(),
+  {
+    errorOnUnknownElements: true,
+    errorOnUnknownProperties: true,
+  }
+);
