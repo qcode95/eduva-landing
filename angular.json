@@ -99,30 +99,6 @@
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
-        },
-        "test": {
-          "builder": "@angular-builders/custom-webpack:karma",
-          "options": {
-            "customWebpackConfig": {
-              "path": "./custom-webpack.config.ts"
-            },
-            "polyfills": [],
-            "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public",
-                "output": "."
-              },
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "assets"
-              }
-            ],
-            "styles": ["src/styles.css"],
-            "scripts": []
-          }
         }
       }
     }
