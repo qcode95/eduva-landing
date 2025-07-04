@@ -22,7 +22,8 @@ export class AuthService {
   // API URLs
   private readonly BASE_API_URL = environment.baseApiUrl;
   private readonly REGISTER_URL = `${this.BASE_API_URL}/auth/register`;
-  private readonly CLIENT_URL = environment.clientUrl;
+
+  private readonly CLIENT_URL = `${environment.clientUrl}/auth/login`;
 
   private readonly isLoadingSignal = signal<boolean>(false);
   readonly isLoading = this.isLoadingSignal.asReadonly();
