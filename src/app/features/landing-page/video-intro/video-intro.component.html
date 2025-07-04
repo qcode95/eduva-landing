@@ -2,8 +2,8 @@
   <!-- Decor -->
   <img
     alt=""
-    src="/images/decor/decor-13.png"
-    class="absolute left-0 top-[100px] w-[814px]" />
+    src="./images/decor/decor-13.png"
+    class="absolute left-0 top-[100px] w-[814px] select-none" />
   <div class="e-container">
     <section class="section mt-10 flex-col p-[64px] font-lato">
       <h2
@@ -16,11 +16,13 @@
         error commodi possimus similique!
       </p>
       <video
-        src="https://videos.pexels.com/video-files/29808850/12805493_2560_1440_25fps.mp4"
-        class="relative aspect-video rounded-[20px] bg-white shadow-[0_12px_32px_#00000082]"
-        playsinline
-        autoplay
-        loop></video>
+        preload="metadata"
+        poster="./images/thumb-nail/thumb-nail-ai.png"
+        class="aspect-video rounded-[20px] bg-dark-300 shadow-[0_12px_32px_#00000082]"
+        controls>
+        <source
+          src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" />
+      </video>
     </section>
   </div>
 </div>

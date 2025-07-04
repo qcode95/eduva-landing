@@ -6,14 +6,15 @@
       </label>
       @if (redirectLink()) {
         <a
+          tabindex="-1"
           routerLink="{{ redirectLink().href }}"
-          class="mb-2 block font-semibold text-[#f33a58]"
-          >{{ redirectLink().value }}</a
-        >
+          class="mb-2 block font-semibold text-[#f33a58]">
+          {{ redirectLink().value }}
+        </a>
       }
     </div>
     <div
-      class="relative flex overflow-hidden rounded-md border-[1.5px] bg-white dark:bg-dark-300"
+      class="relative flex overflow-hidden rounded-lg border-[1.5px] bg-white dark:bg-dark-300"
       [ngClass]="{
         'h-[44px]': !isTextarea(),
         'border-[#f33a58] dark:border-[#f33a58]':
@@ -43,7 +44,7 @@
           }
           <select
             [formControl]="control"
-            class="custom-select flex w-full items-center border-none bg-transparent py-3 pl-4 pr-[42px] leading-none outline-none placeholder:text-black/60 dark:!bg-dark-400 dark:!text-white dark:text-white dark:placeholder:text-[#64748b]"
+            class="custom-select flex w-full items-center border-none bg-transparent py-3 pl-4 pr-[42px] leading-none outline-none placeholder:text-black/60 dark:!bg-dark-400 dark:text-white dark:placeholder:text-[#64748b]"
             (blur)="handleTouched()">
             <option value="" disabled selected hidden>
               {{ placeholder() }}
@@ -86,13 +87,16 @@
         type() !== 'password' &&
         (!options() || options().length === 0)
       ) {
-        <i
-          class="fa-solid fa-triangle-exclamation animate-shake absolute right-[14px] top-[20%] block text-base text-[#f33a58]"></i>
+        <div class="absolute right-[14px] top-1/2 -translate-y-1/2">
+          <i
+            class="fa-solid fa-triangle-exclamation animate-shake text-base text-[#f33a58]"></i>
+        </div>
       } @else if (
         type() === 'password' && (!options() || options().length === 0)
       ) {
         @if (isShowPassword()) {
           <span
+            tabindex="-1"
             class="material-symbols-outlined absolute right-[14px] top-[17%] block cursor-pointer text-lg text-[#64748b]"
             (mousedown)="$event.preventDefault()"
             (click)="
@@ -104,6 +108,7 @@
           </span>
         } @else {
           <span
+            tabindex="-1"
             class="material-symbols-outlined absolute right-[14px] top-[17%] block cursor-pointer text-lg text-[#64748b]"
             (mousedown)="$event.preventDefault()"
             (click)="
