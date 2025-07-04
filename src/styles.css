@@ -71,9 +71,6 @@
       sans-serif;
   }
 
-  html.dark {
-  }
-
   html *::-webkit-scrollbar {
     border-radius: 0;
     width: 4px;
@@ -98,9 +95,6 @@
     direction: ltr;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  .dark body {
   }
 
   input,
@@ -129,6 +123,7 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     text-align: center;
+    user-select: none;
     transition: color linear 0.2s;
   }
 

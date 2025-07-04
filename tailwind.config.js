@@ -14,6 +14,28 @@ module.exports = {
       xs: { max: '575.98px' },
     },
     extend: {
+      animation: {
+        shake: 'shake 0.5s ease-in-out',
+      },
+      keyframes: {
+        shake: {
+          '0%': {
+            transform: 'translate(0)',
+          },
+          '25%': {
+            transform: 'translate(-8px)',
+          },
+          '50%': {
+            transform: 'translate(8px)',
+          },
+          '75%': {
+            transform: 'translate(-8px)',
+          },
+          '100%': {
+            transform: 'translate(0)',
+          },
+        },
+      },
       colors: {
         textBlack: '#3A4252',
         primary: {
