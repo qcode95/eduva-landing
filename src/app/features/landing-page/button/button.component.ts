@@ -19,6 +19,7 @@ type ButtonType = 'primary' | 'rounded' | 'text' | 'outline';
 })
 export class ButtonComponent {
   text = input.required<string>();
+  buttonType = input<string>('button');
   type = input.required<ButtonType | ButtonType[]>();
   loading = input<boolean>(false);
 
