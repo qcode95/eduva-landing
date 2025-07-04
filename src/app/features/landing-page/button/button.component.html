@@ -1,5 +1,6 @@
 <button
   class="btn"
+  [type]="buttonType()"
   [ngClass]="{
     'btn--primary': typeList.includes('primary'),
     'btn--rounded': typeList.includes('rounded'),
