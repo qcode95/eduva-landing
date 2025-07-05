@@ -45,7 +45,10 @@
         [name]="'phoneNumber'"
         [submitted]="submitted()"
         [required]="true"
-        [phone]="true" />
+        [phone]="true"
+        [errorMessages]="{
+          pattern: 'Số điện thoại không hợp lệ',
+        }" />
 
       <app-form-control
         type="password"
@@ -88,14 +91,7 @@
             }"></div>
         </div>
         <div class="py-2 text-right text-xs font-medium text-[#666]">
-          {{
-            passwordLevel() &&
-              (passwordLevel() === 5
-                ? 'Mật khẩu mạnh'
-                : passwordLevel() === 4
-                  ? 'Mật khẩu trung bình'
-                  : 'Mật khẩu yếu')
-          }}
+          {{ passwordStrengthLabel() }}
         </div>
       </div>
 
