@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/auth/services/auth.service';
 import { GlobalModalService } from '../../../shared/layout/global-modal/global-modal.service';
 
+import { isFormFieldMismatch } from '../../../shared/utils/util-functions';
+
 import { FormControlComponent } from '../../../shared/components/form-control/form-control.component';
 import { ButtonComponent } from '../button/button.component';
 
@@ -45,7 +47,9 @@ export class SignUpModalComponent {
 
   submitted = signal<boolean>(false);
 
-  passwordLevel = signal<number | undefined>(undefined);
+  readonly passwordValue = signal<string>('');
+  readonly passwordLevel = signal<number | undefined>(undefined);
+  readonly passwordStrengthLabel = signal<string>('');
 
   constructor() {
     this.form = this.fb.group({
@@ -56,20 +60,26 @@ export class SignUpModalComponent {
       phoneNumber: [''],
     });
 
-    this.form.get('password')!.valueChanges.subscribe((password: string) => {
-      this.passwordLevel.set(this.calcPasswordLevel(password));
+    this.form.get('password')!.valueChanges.subscribe(value => {
+      this.passwordValue.set(value ?? '');
+
+      const level = this.calcPasswordLevel(value ?? '');
+      this.passwordLevel.set(level);
+
+      if (!level || level < 1) {
+        this.passwordStrengthLabel.set('');
+      } else if (level === 5) {
+        this.passwordStrengthLabel.set('Mật khẩu mạnh');
+      } else if (level === 4) {
+        this.passwordStrengthLabel.set('Mật khẩu trung bình');
+      } else {
+        this.passwordStrengthLabel.set('Mật khẩu yếu');
+      }
     });
   }
 
-  private calcPasswordLevel(password: string): number | undefined {
-    if (!password) return undefined;
-    let level = 0;
-    if (password.length >= 6) level++;
-    if (/[a-z]/.test(password)) level++;
-    if (/[A-Z]/.test(password)) level++;
-    if (/\d/.test(password)) level++;
-    if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) level++;
-    return level;
+  get passwordMisMatch() {
+    return isFormFieldMismatch(this.form);
   }
 
   closeModal() {
@@ -92,5 +102,17 @@ export class SignUpModalComponent {
     };
 
     this.authService.register(req).subscribe(() => this.closeModal());
+  }
+
+  private calcPasswordLevel(password: string): number | undefined {
+    if (!password) return undefined;
+
+    let level = 0;
+    if (password.length >= 6) level++;
+    if (/[a-z]/.test(password)) level++;
+    if (/[A-Z]/.test(password)) level++;
+    if (/\d/.test(password)) level++;
+    if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) level++;
+    return level;
   }
 }
