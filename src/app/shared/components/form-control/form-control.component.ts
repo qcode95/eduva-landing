@@ -156,6 +156,14 @@ export class FormControlComponent
     this.isShowPassword.set(!this.isShowPassword());
   }
 
+  resetControl(value = '') {
+    this.control.reset(value, {
+      emitEvent: false,
+    });
+    this.control.markAsPristine();
+    this.control.markAsUntouched();
+  }
+
   private onChange: (value: any) => void = () => {};
   private onTouched: () => void = () => {};
 
