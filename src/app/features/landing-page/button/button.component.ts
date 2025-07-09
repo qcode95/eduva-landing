@@ -21,6 +21,7 @@ export class ButtonComponent {
   text = input.required<string>();
   buttonType = input<string>('button');
   type = input.required<ButtonType | ButtonType[]>();
+  disabled = input<boolean>(false);
   loading = input<boolean>(false);
 
   @Output() clickEvent = new EventEmitter<Event>();

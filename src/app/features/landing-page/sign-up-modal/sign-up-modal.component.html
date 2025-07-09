@@ -112,8 +112,9 @@
         [text]="'Đăng ký'"
         [buttonType]="'submit'"
         [type]="'rounded'"
-        (clickEvent)="onSubmit()"
-        [loading]="isLoading()" />
+        [disabled]="form.invalid || passwordMisMatch"
+        [loading]="isLoading()"
+        (clickEvent)="onSubmit()" />
     </div>
   </form>
 </div>
