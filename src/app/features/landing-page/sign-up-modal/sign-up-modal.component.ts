@@ -60,7 +60,7 @@ export class SignUpModalComponent {
       phoneNumber: [''],
     });
 
-    this.form.get('password')!.valueChanges.subscribe(value => {
+    this.form.get('password')?.valueChanges.subscribe(value => {
       this.passwordValue.set(value ?? '');
 
       const level = this.calcPasswordLevel(value ?? '');
