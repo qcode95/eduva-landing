@@ -79,7 +79,7 @@ export class SignUpModalComponent {
   }
 
   get passwordMisMatch() {
-    return isFormFieldMismatch(this.form);
+    return isFormFieldMismatch(this.form, 'password');
   }
 
   closeModal() {
