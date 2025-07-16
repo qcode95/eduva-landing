@@ -51,13 +51,14 @@
         }" />
 
       <app-form-control
+        formControlName="password"
+        name="password"
         type="password"
         label="Mật khẩu"
         placeholder="Mật khẩu"
-        formControlName="password"
-        [name]="'password'"
-        [submitted]="submitted()"
-        [required]="true" />
+        [required]="true"
+        [validatePassword]="true"
+        [submitted]="submitted()" />
       <div class="mx-1 my-[10px] mt-1">
         <div class="flex gap-1">
           <div
