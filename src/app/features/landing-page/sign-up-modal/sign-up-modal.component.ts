@@ -9,6 +9,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -16,11 +17,16 @@ import { AuthService } from '../../../core/auth/services/auth.service';
 import { GlobalModalService } from '../../../shared/layout/global-modal/global-modal.service';
 
 import { isFormFieldMismatch } from '../../../shared/utils/util-functions';
+import {
+  customEmailValidator,
+  strongPasswordValidator,
+} from '../../../shared/utils/form-validators';
 
 import { FormControlComponent } from '../../../shared/components/form-control/form-control.component';
 import { ButtonComponent } from '../button/button.component';
 
 import { type RegisterRequest } from '../../../shared/models/api/request/command/register-request.model';
+import { VIETNAM_PHONE_REGEX } from '../../../shared/constants/common.constant';
 
 @Component({
   selector: 'app-sign-up-modal',
@@ -53,11 +59,14 @@ export class SignUpModalComponent {
 
   constructor() {
     this.form = this.fb.group({
-      fullName: [''],
-      email: [''],
-      password: [''],
-      confirmPassword: [''],
-      phoneNumber: [''],
+      fullName: ['', Validators.required],
+      email: ['', customEmailValidator],
+      password: ['', [Validators.required, strongPasswordValidator]],
+      confirmPassword: ['', Validators.required],
+      phoneNumber: [
+        '',
+        [Validators.required, Validators.pattern(VIETNAM_PHONE_REGEX)],
+      ],
     });
 
     this.form.get('password')?.valueChanges.subscribe(value => {
