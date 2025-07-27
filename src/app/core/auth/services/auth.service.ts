@@ -1,7 +1,7 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, finalize, map, Observable, tap, throwError } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 
@@ -44,14 +44,13 @@ export class AuthService {
           );
         } else {
           this.toastService.errorGeneral();
-          this.isLoadingSignal.set(false);
         }
       }),
       map(() => void 0),
-      catchError(err => {
+      finalize(() => this.isLoadingSignal.set(false)),
+      catchError((err: HttpErrorResponse) => {
         this.handleRegisterError(err);
-        this.isLoadingSignal.set(false);
-        return of(void 0);
+        return throwError(() => err);
       })
     );
   }
