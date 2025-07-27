@@ -110,7 +110,9 @@ export class SignUpModalComponent {
       confirmPassword: this.form.value.confirmPassword,
     };
 
-    this.authService.register(req).subscribe(() => this.closeModal());
+    this.authService.register(req).subscribe({
+      next: () => this.closeModal(),
+    });
   }
 
   private calcPasswordLevel(password: string): number | undefined {
