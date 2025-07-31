@@ -1,7 +1,9 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { AuthService } from './auth.service';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
 
 import { MessageService } from 'primeng/api';
 
