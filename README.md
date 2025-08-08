@@ -71,7 +71,7 @@ EDUVA is a modern, comprehensive educational management platform designed to str
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/tranduckhuy/eduva-landing.git
+   git clone https://github.com/qcode95/eduva-landing.git
    cd eduva-landing
    ```
 
