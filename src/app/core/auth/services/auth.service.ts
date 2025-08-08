@@ -48,26 +48,22 @@ export class AuthService {
       }),
       map(() => void 0),
       finalize(() => this.isLoadingSignal.set(false)),
-      catchError((err: HttpErrorResponse) => {
-        this.handleRegisterError(err);
-        return throwError(() => err);
-      })
+      catchError((err: HttpErrorResponse) => this.handleRegisterError(err))
     );
   }
 
-  private handleRegisterError(err: HttpErrorResponse): void {
+  private handleRegisterError(err: HttpErrorResponse): Observable<void> {
     const statusCode = err.error?.statusCode;
 
-    switch (statusCode) {
-      case StatusCode.EMAIL_ALREADY_EXISTS:
-        this.toastService.error(
-          'Đăng ký thất bại',
-          'Email đã tồn tại. Vui lòng chọn email khác!'
-        );
-        break;
-
-      default:
-        this.toastService.errorGeneral();
+    if (statusCode === StatusCode.EMAIL_ALREADY_EXISTS) {
+      this.toastService.warn(
+        'Đăng ký thất bại',
+        'Email đã tồn tại. Vui lòng chọn email khác!'
+      );
+    } else {
+      this.toastService.errorGeneral();
     }
+
+    return throwError(() => err);
   }
 }

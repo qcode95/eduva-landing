@@ -5,9 +5,11 @@ import {
   inject,
   viewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { FixedBarService } from '../fixed-bar.service';
 import { GlobalModalService } from '../../../shared/layout/global-modal/global-modal.service';
+
 import { SignUpModalComponent } from '../sign-up-modal/sign-up-modal.component';
 
 @Component({
@@ -19,6 +21,7 @@ import { SignUpModalComponent } from '../sign-up-modal/sign-up-modal.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroComponent {
+  private readonly router = inject(Router);
   private readonly fixedBarService = inject(FixedBarService);
   private readonly globalModalService = inject(GlobalModalService);
 
@@ -35,5 +38,9 @@ export class HeroComponent {
 
   openSignUpModal() {
     this.globalModalService.open(SignUpModalComponent);
+  }
+
+  navigateToComingSoon() {
+    this.router.navigateByUrl('/errors/coming-soon');
   }
 }
