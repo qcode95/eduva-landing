@@ -20,15 +20,28 @@ import { routes } from './app.routes';
 
 import { MyPreset } from './my-preset';
 
+import { loggingInterceptor } from './core/interceptors/logging.interceptor';
+import { cacheInterceptor } from './core/interceptors/cache.interceptor';
+import { loadingInterceptor } from './core/interceptors/loading.interceptor';
+import { retryInterceptor } from './core/interceptors/retry.interceptor';
+import { errorInterceptor } from './core/interceptors/error.interceptor';
+
 registerLocaleData(localeVi);
 
 const AppProviders = [MessageService, ConfirmationService];
+const httpInterceptors = withInterceptors([
+  loggingInterceptor,
+  cacheInterceptor,
+  loadingInterceptor,
+  retryInterceptor,
+  errorInterceptor,
+]);
 
 export const appConfig: ApplicationConfig = {
   providers: [
     ...AppProviders,
     provideExperimentalZonelessChangeDetection(),
-    provideHttpClient(withInterceptors([])),
+    provideHttpClient(httpInterceptors),
     provideRouter(
       routes,
       withComponentInputBinding(),
