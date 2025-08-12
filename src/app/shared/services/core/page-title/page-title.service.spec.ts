@@ -1,59 +1,60 @@
 import { TestBed } from '@angular/core/testing';
+import { Router, ActivatedRoute, Data, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
-
-import { of, Subject } from 'rxjs';
-
-import { vi } from 'vitest';
-
 import { PageTitleService } from './page-title.service';
+import { BehaviorSubject, of } from 'rxjs';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 
 describe('PageTitleService', () => {
   let service: PageTitleService;
-  let events$: Subject<any>;
+  let routerEvents$: BehaviorSubject<any>;
+  let mockTitle: Title;
+  let mockRouter: Partial<Router>;
+  let mockActivatedRoute: ActivatedRoute;
 
   beforeEach(() => {
-    events$ = new Subject();
+    routerEvents$ = new BehaviorSubject<any>(null);
+
+    mockTitle = {
+      setTitle: vi.fn(),
+    } as unknown as Title;
+
+    mockRouter = {
+      events: routerEvents$.asObservable(),
+    };
+
+    const data$: BehaviorSubject<Data> = new BehaviorSubject<Data>({});
+    mockActivatedRoute = {
+      firstChild: {
+        firstChild: {
+          data: data$.asObservable(),
+        } as any,
+      } as any,
+    } as ActivatedRoute;
 
     TestBed.configureTestingModule({
       providers: [
         PageTitleService,
-        {
-          provide: Router,
-          useValue: {
-            events: events$.asObservable(),
-          },
-        },
-        {
-          provide: ActivatedRoute,
-          useValue: createMockActivatedRoute({ title: 'Test Page' }, 2),
-        },
-        {
-          provide: Title,
-          useValue: {
-            setTitle: vi.fn(),
-          },
-        },
+        { provide: Title, useValue: mockTitle },
+        { provide: Router, useValue: mockRouter },
+        { provide: ActivatedRoute, useValue: mockActivatedRoute },
       ],
     });
+
     service = TestBed.inject(PageTitleService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should set default title when no title in data', () => {
+    service.init();
+
+    routerEvents$.next(new NavigationEnd(1, '/test', '/test'));
+
+    expect(mockTitle.setTitle).toHaveBeenCalledWith(
+      'EDUVA - Học, Học Nữa, Học Mãi'
+    );
+  });
 });
-
-function createMockActivatedRoute(data: any, depth: number): any {
-  if (depth === 0) {
-    return {
-      firstChild: null,
-      data: of(data),
-    };
-  }
-
-  return {
-    firstChild: createMockActivatedRoute(data, depth - 1),
-    data: of({}),
-  };
-}

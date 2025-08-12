@@ -14,7 +14,7 @@ import {
 import { CommonModule } from '@angular/common';
 
 import { AuthService } from '../../../core/auth/services/auth.service';
-import { GlobalModalService } from '../../../shared/layout/global-modal/global-modal.service';
+import { GlobalModalService } from '../../../shared/services/layout/global-modal.service';
 
 import { isFormFieldMismatch } from '../../../shared/utils/util-functions';
 import {
@@ -22,11 +22,12 @@ import {
   strongPasswordValidator,
 } from '../../../shared/utils/form-validators';
 
+import { VIETNAM_PHONE_REGEX } from '../../../shared/constants/common.constant';
+
 import { FormControlComponent } from '../../../shared/components/form-control/form-control.component';
 import { ButtonComponent } from '../button/button.component';
 
 import { type RegisterRequest } from '../../../shared/models/api/request/command/register-request.model';
-import { VIETNAM_PHONE_REGEX } from '../../../shared/constants/common.constant';
 
 @Component({
   selector: 'app-sign-up-modal',
