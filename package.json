@@ -40,6 +40,7 @@
     "@jscutlery/swc-angular-preset": "^0.3.0",
     "@testing-library/angular": "^17.4.0",
     "@types/dotenv-webpack": "^7.0.8",
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.0.10",
     "dotenv": "^16.5.0",
     "dotenv-webpack": "^8.1.0",

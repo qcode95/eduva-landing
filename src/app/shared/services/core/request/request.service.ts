@@ -28,7 +28,7 @@ export class RequestService {
   get<T>(
     url: string,
     params?: Record<string, any>,
-    options?: RequestOptions,
+    options?: RequestOptions
   ): Observable<BaseResponse<T>> {
     const reqOptions = {
       params: createRequestParams(params),
@@ -47,7 +47,7 @@ export class RequestService {
   getFile(
     url: string,
     params?: Record<string, any>,
-    options?: RequestOptions,
+    options?: RequestOptions
   ): Observable<HttpResponse<Blob>> {
     return this.http.get(url, {
       params: createRequestParams(params),
@@ -68,29 +68,10 @@ export class RequestService {
   post<T>(
     url: string,
     body?: any,
-    options?: RequestOptions,
+    options?: RequestOptions
   ): Observable<BaseResponse<T>> {
     return this.http.post<BaseResponse<T>>(url, JSON.stringify(body ?? {}), {
       headers: this.getJsonHeaders(),
-      context: buildHttpContext(options),
-    });
-  }
-
-  /**
-   * Sends a POST request with FormData.
-   * Commonly used for file upload scenarios.
-   *
-   * @template T The expected data type within the BaseResponse.
-   * @param url The target API endpoint.
-   * @param formData A FormData object with fields and optional files.
-   * @returns An Observable of BaseResponse<T>.
-   */
-  postFormData<T>(
-    url: string,
-    formData: FormData,
-    options?: RequestOptions,
-  ): Observable<BaseResponse<T>> {
-    return this.http.post<BaseResponse<T>>(url, formData, {
       context: buildHttpContext(options),
     });
   }
@@ -115,7 +96,7 @@ export class RequestService {
   postFile(
     url: string,
     formData: FormData,
-    options?: RequestOptions,
+    options?: RequestOptions
   ): Observable<HttpResponse<Blob>> {
     return this.http.post(url, formData, {
       context: buildHttpContext(options),
@@ -135,7 +116,7 @@ export class RequestService {
   put<T>(
     url: string,
     body?: any,
-    options?: RequestOptions,
+    options?: RequestOptions
   ): Observable<BaseResponse<T>> {
     return this.http.put<BaseResponse<T>>(url, JSON.stringify(body ?? {}), {
       headers: this.getJsonHeaders(),
@@ -152,9 +133,37 @@ export class RequestService {
    */
   delete<T>(
     url: string,
-    options?: RequestOptions,
+    params?: any,
+    options?: RequestOptions
   ): Observable<BaseResponse<T>> {
     return this.http.delete<BaseResponse<T>>(url, {
+      params: createRequestParams(params),
+      context: buildHttpContext(options),
+    });
+  }
+
+  /**
+   * Sends an HTTP DELETE request with an optional JSON body and custom request options.
+   *
+   * This method is useful for DELETE operations that require additional data in the request body,
+   * such as batch deletions or conditional deletions based on filters or flags.
+   *
+   * ⚠️ Note: Not all servers or proxies support bodies in DELETE requests.
+   *
+   * @template T - The expected type of the response payload inside `BaseResponse<T>`.
+   * @param url - The target URL to send the DELETE request to.
+   * @param body - Optional body payload to send with the DELETE request (e.g., filter conditions, list of IDs).
+   * @param options - Optional request options (e.g., loading indicator key, toast messages, custom context).
+   * @returns An `Observable` of type `BaseResponse<T>`, representing the HTTP response.
+   */
+  deleteWithBody<T>(
+    url: string,
+    body?: any,
+    options?: RequestOptions
+  ): Observable<BaseResponse<T>> {
+    return this.http.delete<BaseResponse<T>>(url, {
+      headers: this.getJsonHeaders(),
+      body: JSON.stringify(body ?? {}),
       context: buildHttpContext(options),
     });
   }

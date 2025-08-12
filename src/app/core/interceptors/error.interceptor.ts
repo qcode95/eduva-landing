@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { catchError, throwError } from 'rxjs';
 
-import { GlobalModalService } from '../../shared/layout/global-modal/global-modal.service';
+import { GlobalModalService } from '../../shared/services/layout/global-modal.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
