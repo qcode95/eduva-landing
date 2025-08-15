@@ -25,24 +25,9 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
     router.navigateByUrl('/errors/404');
   };
 
-  const handleTooManyRequest = (error: HttpErrorResponse) => {
+  const handleTooManyRequest = () => {
     globalModalService.close();
-
-    let waitTimeMinutes = 1;
-
-    const requestUrl = error.url ?? '';
-
-    if (requestUrl.includes('/auth')) {
-      waitTimeMinutes = 10;
-    }
-
-    if (waitTimeMinutes <= 0) {
-      waitTimeMinutes = 1;
-    } else if (waitTimeMinutes > 1440) {
-      waitTimeMinutes = 60;
-    }
-
-    router.navigateByUrl(`/errors/429?waitTime=${waitTimeMinutes}`);
+    router.navigateByUrl('/errors/429');
   };
 
   const handleErrorByStatusCode = (error: HttpErrorResponse) => {
@@ -65,7 +50,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
     // Too many request
     if (status === 429) {
-      handleTooManyRequest(error);
+      handleTooManyRequest();
     }
   };
 
