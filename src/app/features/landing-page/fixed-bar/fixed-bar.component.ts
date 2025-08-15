@@ -6,9 +6,10 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LogoComponent } from '../logo/logo.component';
 import { FixedBarService } from '../fixed-bar.service';
-import { GlobalModalService } from '../../../shared/layout/global-modal/global-modal.service';
+import { GlobalModalService } from '../../../shared/services/layout/global-modal.service';
+
+import { LogoComponent } from '../logo/logo.component';
 import { SignUpModalComponent } from '../sign-up-modal/sign-up-modal.component';
 
 @Component({

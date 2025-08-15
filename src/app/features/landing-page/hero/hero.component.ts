@@ -8,7 +8,7 @@ import {
 import { Router } from '@angular/router';
 
 import { FixedBarService } from '../fixed-bar.service';
-import { GlobalModalService } from '../../../shared/layout/global-modal/global-modal.service';
+import { GlobalModalService } from '../../../shared/services/layout/global-modal.service';
 
 import { SignUpModalComponent } from '../sign-up-modal/sign-up-modal.component';
 
